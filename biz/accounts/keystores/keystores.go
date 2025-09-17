@@ -21,7 +21,7 @@ func createKs() {
 }
 
 func importKs() {
-	file := "./tmp/UTC--2018-07-04T09-58-30.122808598Z--20f8d42fb0f667f2e53930fed426f225752453b3"
+	file := "./tmp/UTC--2025-09-17T06-51-31.687171200Z--f1aa8effaa50338837ee842bf5e6f49441967d2f"
 	ks := keystore.NewKeyStore("./tmp", keystore.StandardScryptN, keystore.StandardScryptP)
 	jsonBytes, err := ioutil.ReadFile(file)
 	if err != nil {
@@ -42,6 +42,6 @@ func importKs() {
 }
 
 func main() {
-	createKs()
-	//importKs()
+	//createKs()
+	importKs()
 }
