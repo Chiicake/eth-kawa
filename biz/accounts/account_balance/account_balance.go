@@ -18,7 +18,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	account := common.HexToAddress("0xd38eB2588Cf4D373dB7d27634dEC7AF45409172C")
+	account := common.HexToAddress("0xcb522031eD04375066653e40667839d813EB67EB")
 	balance, err := client.BalanceAt(context.Background(), account, nil)
 	if err != nil {
 		log.Fatal(err)
