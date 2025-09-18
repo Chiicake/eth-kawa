@@ -25,7 +25,7 @@ func main() {
 	}
 	fmt.Println(balance) // 25893180161173005034
 
-	blockNumber := big.NewInt(0)
+	blockNumber := big.NewInt(2)
 	balanceAt, err := client.BalanceAt(context.Background(), account, blockNumber)
 	if err != nil {
 		log.Fatal(err)

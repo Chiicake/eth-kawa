@@ -12,12 +12,12 @@ import (
 )
 
 func main() {
-	client, err := ethclient.Dial("https://cloudflare-eth.com")
+	client, err := ethclient.Dial("http://localhost:8545")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	blockNumber := big.NewInt(5671744)
+	blockNumber := big.NewInt(2)
 	block, err := client.BlockByNumber(context.Background(), blockNumber)
 	if err != nil {
 		log.Fatal(err)
@@ -30,7 +30,14 @@ func main() {
 		fmt.Println(tx.GasPrice().Uint64()) // 102000000000
 		fmt.Println(tx.Nonce())             // 110644
 		fmt.Println(tx.Data())              // []
-		fmt.Println(tx.To().Hex())          // 0x55fE59D8Ad77035154dDd0AD0388D09Dd4047A8e
+		fmt.Println("to:", tx.To().Hex())   // 0x55fE59D8Ad77035154dDd0AD0388D09Dd4047A8e
+
+		// get from
+		from, err := types.Sender(types.NewEIP155Signer(tx.ChainId()), tx)
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println("from:", from.Hex()) // 0x71C7656EC7ab88b098defB751B7401B5f6d8976F
 
 		chainID, err := client.NetworkID(context.Background())
 		if err != nil {
