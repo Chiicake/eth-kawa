@@ -13,7 +13,8 @@ import (
 
 func main() {
 	//client, err := ethclient.Dial("https://cloudflare-eth.com")
-	client, err := ethclient.Dial("http://localhost:8545")
+	//client, err := ethclient.Dial("http://localhost:8545")
+	client, err := ethclient.Dial("http://60.205.157.230:8545")
 	if err != nil {
 		log.Fatal(err)
 	}
