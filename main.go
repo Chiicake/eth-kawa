@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"eth-kawa/biz/infra"
 	"eth-kawa/biz/subscribe"
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/app/server"
@@ -21,6 +22,7 @@ const (
 var Client *ethclient.Client
 
 func main() {
+	infra.InitDB()
 
 	Client, err := ethclient.Dial(headerURL)
 	if err != nil {
