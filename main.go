@@ -8,7 +8,6 @@ import (
 	"github.com/cloudwego/hertz/pkg/app/server"
 	"github.com/cloudwego/hertz/pkg/common/utils"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
-	"github.com/ethereum/go-ethereum/ethclient"
 	"log"
 	"math/big"
 	"strconv"
@@ -19,15 +18,9 @@ const (
 	headerURL = "http://localhost:8545"
 )
 
-var Client *ethclient.Client
-
 func main() {
 	infra.InitDB()
-
-	Client, err := ethclient.Dial(headerURL)
-	if err != nil {
-		log.Fatal(err)
-	}
+	infra.InitEthClient()
 
 	go subscribe.Subscribe(wsURL)
 	h := server.Default()
@@ -38,12 +31,13 @@ func main() {
 
 	// get block by block number
 	h.GET("/block/data/:number", func(ctx context.Context, c *app.RequestContext) {
+		client := infra.GlobalEthClient
 		number := c.Param("number")
 		blockNumber, err := strconv.ParseInt(number, 10, 64)
 		if err != nil {
 			log.Fatal(err)
 		}
-		block, err := Client.BlockByNumber(context.Background(), big.NewInt(blockNumber))
+		block, err := client.BlockByNumber(context.Background(), big.NewInt(blockNumber))
 		if err != nil {
 			log.Fatal(err)
 		}

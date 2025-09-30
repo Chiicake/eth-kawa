@@ -2,17 +2,14 @@ package subscribe
 
 import (
 	"context"
+	"eth-kawa/biz/infra"
 	"fmt"
 	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/ethclient"
 	"log"
 )
 
 func Subscribe(url string) {
-	client, err := ethclient.Dial(url)
-	if err != nil {
-		log.Fatal(err)
-	}
+	client := infra.GlobalEthClient
 
 	headers := make(chan *types.Header)
 	sub, err := client.SubscribeNewHead(context.Background(), headers)
