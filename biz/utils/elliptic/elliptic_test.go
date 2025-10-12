@@ -10,7 +10,7 @@ import (
 )
 
 func TestEllipticCurveCreation(t *testing.T) {
-	curve, err := NewEllipticCurve(K1.A, K1.B, K1.P)
+	curve, err := NewEllipticCurve(K1.A, K1.B, K1.P, K1.N)
 	if err != nil {
 		t.Errorf("NewEllipticCurve failed: %v", err)
 	}
@@ -37,7 +37,7 @@ func TestPrintCurveFigure(t *testing.T) {
 	a := big.NewInt(0)
 	b := big.NewInt(7)
 
-	curve, err := NewEllipticCurve(a, b, p)
+	curve, err := NewEllipticCurve(a, b, p, K1.N)
 	if err != nil {
 		t.Fatalf("Failed to create elliptic curve: %v", err)
 	}
@@ -49,7 +49,7 @@ func TestPrintCurveFigure(t *testing.T) {
 	points := collectCurvePoints(curve)
 
 	// 使用gonum/plot创建散点图
-	err = plotCurve(curve, points, t)
+	err = plotCurve(curve, points)
 	if err != nil {
 		t.Fatalf("Failed to plot curve: %v", err)
 	}
@@ -93,7 +93,7 @@ func collectCurvePoints(curve *EllipticCurve) plotter.XYs {
 }
 
 // 新增函数：使用gonum/plot绘制曲线
-func plotCurve(curve *EllipticCurve, points plotter.XYs, t *testing.T) error {
+func plotCurve(curve *EllipticCurve, points plotter.XYs) error {
 	// 创建新图表
 	p := plot.New()
 

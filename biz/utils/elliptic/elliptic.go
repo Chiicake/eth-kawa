@@ -19,16 +19,17 @@ var (
 type EllipticCurve struct {
 	A, B, P   *big.Int
 	Generator *ECPoint
+	N         *big.Int // 曲线阶数
 }
 
 // NewEllipticCurve 创建一个新的椭圆曲线实例
-func NewEllipticCurve(a, b, p *big.Int) (*EllipticCurve, error) {
+func NewEllipticCurve(a, b, p, n *big.Int) (*EllipticCurve, error) {
 	// 检查p是否为质数
 	if !isProbablePrime(p, PRIMESECURITY) {
 		return nil, errors.New("不安全参数: p不是质数")
 	}
 
-	curve := &EllipticCurve{A: a, B: b, P: p}
+	curve := &EllipticCurve{A: a, B: b, P: p, N: n}
 
 	// 检查曲线是否为奇异曲线
 	if curve.IsSingular() {
@@ -40,7 +41,7 @@ func NewEllipticCurve(a, b, p *big.Int) (*EllipticCurve, error) {
 
 // NewEllipticCurveFromSecP256 从SecP256参数创建椭圆曲线
 func NewEllipticCurveFromSecP256(secP256 *SecP256) *EllipticCurve {
-	curve, err := NewEllipticCurve(secP256.A, secP256.B, secP256.P)
+	curve, err := NewEllipticCurve(secP256.A, secP256.B, secP256.P, secP256.N)
 	if err != nil {
 		panic(err)
 	}

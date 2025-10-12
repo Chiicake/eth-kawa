@@ -8,6 +8,7 @@ import (
 type SecP256 struct {
 	A, B, P *big.Int // 曲线参数
 	Gx, Gy  *big.Int // 生成点坐标
+	N       *big.Int // 曲线阶数
 }
 
 // K1 是secp256k1曲线的实例
@@ -43,4 +44,14 @@ func init() {
 	if ok {
 		K1.Gy = gy
 	}
+
+	// 初始化曲线阶数n: FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141
+	n, ok := new(big.Int).SetString(
+		"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141",
+		16,
+	)
+	if ok {
+		K1.N = n
+	}
+
 }
