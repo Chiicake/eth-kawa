@@ -7,8 +7,8 @@ import (
 	"math/big"
 )
 
-// EllipticCurveSign 椭圆曲线签名算法(ECDSA)
-func EllipticCurveSign(curve *EllipticCurve, privateKey *big.Int, message []byte) (*big.Int, *big.Int, error) {
+// ECDSASign 椭圆曲线签名算法(ECDSASign)
+func ECDSASign(curve *EllipticCurve, privateKey *big.Int, message []byte) (*big.Int, *big.Int, error) {
 	// 1. 检查私钥有效性
 	if privateKey.Cmp(big.NewInt(0)) <= 0 || privateKey.Cmp(curve.N) >= 0 {
 		return nil, nil, errors.New("invalid private key")
@@ -54,8 +54,8 @@ func EllipticCurveSign(curve *EllipticCurve, privateKey *big.Int, message []byte
 	return r, s, nil
 }
 
-// EllipticCurveVerify 椭圆曲线验证算法(ECDSA)
-func EllipticCurveVerify(curve *EllipticCurve, publicKey *ECPoint, message []byte, r, s *big.Int) (bool, error) {
+// ECDSAVerify 椭圆曲线验证算法(ECDSASign)
+func ECDSAVerify(curve *EllipticCurve, publicKey *ECPoint, message []byte, r, s *big.Int) (bool, error) {
 	// 1. 检查r和s的有效性
 	if r.Cmp(big.NewInt(0)) <= 0 || r.Cmp(curve.N) >= 0 {
 		return false, errors.New("invalid r value")

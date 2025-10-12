@@ -25,7 +25,7 @@ func TestSignAndVerify(t *testing.T) {
 	message := []byte("Hello, World!")
 
 	// 对消息进行签名
-	r, s, err := EllipticCurveSign(curve, privateKey.D, message)
+	r, s, err := ECDSASign(curve, privateKey.D, message)
 	if err != nil {
 		t.Fatalf("签名过程失败: %v", err)
 	}
@@ -34,7 +34,7 @@ func TestSignAndVerify(t *testing.T) {
 	}
 
 	// 验证签名
-	valid, err := EllipticCurveVerify(curve, publicKey, message, r, s)
+	valid, err := ECDSAVerify(curve, publicKey, message, r, s)
 	if err != nil {
 		t.Fatalf("验证过程失败: %v", err)
 	}
@@ -44,7 +44,7 @@ func TestSignAndVerify(t *testing.T) {
 
 	// 额外测试：验证篡改后的消息
 	tamperedMessage := []byte("Hello, World?") // 篡改原始消息
-	valid, err = EllipticCurveVerify(curve, publicKey, tamperedMessage, r, s)
+	valid, err = ECDSAVerify(curve, publicKey, tamperedMessage, r, s)
 	if err != nil {
 		t.Fatalf("篡改消息验证失败: %v", err)
 	}
