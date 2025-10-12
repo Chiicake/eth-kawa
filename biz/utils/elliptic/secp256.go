@@ -44,28 +44,3 @@ func init() {
 		K1.Gy = gy
 	}
 }
-
-// GetA 获取参数a
-func (s *SecP256) GetA() *big.Int {
-	return s.A
-}
-
-// GetB 获取参数b
-func (s *SecP256) GetB() *big.Int {
-	return s.B
-}
-
-// GetP 获取参数p
-func (s *SecP256) GetP() *big.Int {
-	return s.P
-}
-
-// GetGx 获取生成点G的横坐标
-func (s *SecP256) GetGx() *big.Int {
-	return s.Gx
-}
-
-// GetGy 获取生成点G的纵坐标
-func (s *SecP256) GetGy() *big.Int {
-	return s.Gy
-}
