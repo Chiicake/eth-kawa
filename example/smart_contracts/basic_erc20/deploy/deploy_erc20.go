@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"crypto/ecdsa"
-	erc20 "eth-kawa/example/smart_contracts/basic_erc20" // 替换为你的ERC20 ABI包路径
+	erc20 "eth-kawa/example/smart_contracts/basic_erc20"
 	"fmt"
 	"log"
 	"math/big"
@@ -21,7 +21,7 @@ func main() {
 	}
 
 	// 加载部署者私钥
-	privateKey, err := crypto.HexToECDSA("869a589a1b188e9d1f84c74ad0dd6eaa6eb2f59460dd6c03bff0648736cd265e")
+	privateKey, err := crypto.HexToECDSA("49cbac6737c761593f7c0b4aad8a25c9607b68740ca04a96ef9608c0025ff673")
 	if err != nil {
 		log.Fatalf("无效的私钥: %v", err)
 	}

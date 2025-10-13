@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	account_handler "eth-kawa/biz/handler/account"
+	basic_erc20_handler "eth-kawa/biz/handler/basic_erc20"
 	"eth-kawa/biz/infra"
 	"eth-kawa/biz/subscribe"
 	"github.com/cloudwego/hertz/pkg/app"
@@ -56,9 +57,16 @@ func main() {
 		account_handler.NewAccountHandler(infra.GlobalEthClient, ctx, c, infra.GlobalDB).GetBalance()
 	})
 
-	// transfer
 	h.POST("/api/transfer", func(ctx context.Context, c *app.RequestContext) {
 		account_handler.NewAccountHandler(infra.GlobalEthClient, ctx, c, infra.GlobalDB).Transfer()
+	})
+
+	h.GET("/api/erc20/info", func(ctx context.Context, c *app.RequestContext) {
+		basic_erc20_handler.NewBasicErc20Handler(infra.GlobalEthClient, ctx, c, infra.GlobalDB).GetInfo()
+	})
+
+	h.POST("/api/erc20/transfer", func(ctx context.Context, c *app.RequestContext) {
+		basic_erc20_handler.NewBasicErc20Handler(infra.GlobalEthClient, ctx, c, infra.GlobalDB).Transfer()
 	})
 
 	h.Spin()

@@ -1,9 +1,8 @@
-package contract
+package basic_erc20
 
 import (
 	"context"
 	"crypto/ecdsa"
-	erc20 "eth-kawa/example/smart_contracts/basic_erc20"
 	"fmt"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/crypto"
@@ -12,7 +11,7 @@ import (
 	"math/big"
 )
 
-func DeployErc20(client *ethclient.Client, ctx context.Context, privateKeyHex string) *erc20.BasicErc20 {
+func DeployErc20(client *ethclient.Client, ctx context.Context, privateKeyHex string) *BasicErc20 {
 	// 加载部署者私钥
 	privateKey, err := crypto.HexToECDSA(privateKeyHex)
 	if err != nil {
@@ -52,7 +51,7 @@ func DeployErc20(client *ethclient.Client, ctx context.Context, privateKeyHex st
 	initialSupply := big.NewInt(1000000) // 初始供应量（会自动乘以10^18）
 
 	// 部署合约
-	address, tx, instance, err := erc20.DeployBasicErc20(
+	address, tx, instance, err := DeployBasicErc20(
 		auth,
 		client,
 		tokenName,

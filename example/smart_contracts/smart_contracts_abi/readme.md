@@ -1,6 +1,6 @@
 solc
 ```bash
-solcjs --bin --abi ./store.sol -o ./build
+solcjs -optimize ./store.sol --bin --abi -o ./build
 ```
 
 abigen

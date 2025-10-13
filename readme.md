@@ -7,7 +7,7 @@ ganache
 ```
 Install a Solidity compiler
 ```bash
-npm install --global solc
+npm install -g solc@0.8.8
 ```
 
 Install abigen tool

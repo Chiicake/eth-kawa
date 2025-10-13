@@ -2,24 +2,24 @@ package infra
 
 import (
 	"context"
-	"eth-kawa/biz/contract"
-	erc20 "eth-kawa/example/smart_contracts/basic_erc20"
+	"eth-kawa/biz/contract/basic_erc20"
 )
 
-var GlobalErc20 *erc20.BasicErc20
+var GlobalErc20 *basic_erc20.BasicErc20
 
-const GlobalPrivateKey = "869a589a1b188e9d1f84c74ad0dd6eaa6eb2f59460dd6c03bff0648736cd265e"
+const GlobalPrivateKey = "49cbac6737c761593f7c0b4aad8a25c9607b68740ca04a96ef9608c0025ff673"
 
 func DeployErc20() {
-	GlobalErc20 = contract.DeployErc20(GlobalEthClient, context.Background(), GlobalPrivateKey)
+	GlobalErc20 = basic_erc20.DeployErc20(GlobalEthClient, context.Background(), GlobalPrivateKey)
 }
 
-const GlobalErc20Address = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+const GlobalErc20Address = "1ff00af1c15d143bd4ca9f7d74ed7791b5cb353f"
 
 func LoadErc20() {
-	instance, err := contract.LoadErc20(GlobalErc20Address, GlobalEthClient)
+	instance, err := basic_erc20.LoadErc20(GlobalErc20Address, GlobalEthClient)
 	if err != nil {
 		DeployErc20()
+		return
 	}
 	GlobalErc20 = instance
 }
