@@ -14,15 +14,11 @@ import (
 	"strconv"
 )
 
-const (
-	wsURL     = "ws://localhost:8545"
-	headerURL = "http://localhost:8545"
-)
-
 func main() {
 	infra.InitDB()
 	infra.InitEthClient()
 	infra.InitWSEthClient()
+	infra.LoadErc20()
 
 	go subscribe.Subscribe()
 	h := server.Default()
