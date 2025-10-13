@@ -14,7 +14,7 @@ import (
 )
 
 func (h *BasicErc20Handler) Transfer() {
-	privateKeyHex := h.c.Query("privateKey")
+	privateKeyHex := h.c.Query("private_key")
 	privateKey, err := crypto.HexToECDSA(privateKeyHex)
 	if err != nil {
 		h.c.JSON(consts.StatusBadRequest, utils.H{"message": err.Error()})
@@ -36,7 +36,7 @@ func (h *BasicErc20Handler) Transfer() {
 	}
 
 	// 接收地址
-	toAddressHex := h.c.Query("toAddress")
+	toAddressHex := h.c.Query("to_address")
 	toAddr := common.HexToAddress(toAddressHex)
 	// 转账数量
 	amount := h.c.Query("amount")

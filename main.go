@@ -65,9 +65,7 @@ func main() {
 		basic_erc20_handler.NewBasicErc20Handler(infra.GlobalEthClient, ctx, c, infra.GlobalDB).GetInfo()
 	})
 
-	h.POST("/api/erc20/transfer", func(ctx context.Context, c *app.RequestContext) {
-		basic_erc20_handler.NewBasicErc20Handler(infra.GlobalEthClient, ctx, c, infra.GlobalDB).Transfer()
-	})
+	h.POST("/api/erc20/transfer")
 
 	h.Spin()
 }

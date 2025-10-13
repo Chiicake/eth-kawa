@@ -3,6 +3,7 @@ package infra
 import (
 	"context"
 	"eth-kawa/biz/contract/basic_erc20"
+	"log"
 )
 
 var GlobalErc20 *basic_erc20.BasicErc20
@@ -18,7 +19,7 @@ const GlobalErc20Address = "1ff00af1c15d143bd4ca9f7d74ed7791b5cb353f"
 func LoadErc20() {
 	instance, err := basic_erc20.LoadErc20(GlobalErc20Address, GlobalEthClient)
 	if err != nil {
-		DeployErc20()
+		log.Fatalf("加载合约失败: %v", err)
 		return
 	}
 	GlobalErc20 = instance
