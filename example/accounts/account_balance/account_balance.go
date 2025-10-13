@@ -13,13 +13,13 @@ import (
 
 func main() {
 	//client, err := ethclient.Dial("https://cloudflare-eth.com")
-	//client, err := ethclient.Dial("http://localhost:8545")
-	client, err := ethclient.Dial("http://60.205.157.230:8545")
+	client, err := ethclient.Dial("http://localhost:8545")
+	//client, err := ethclient.Dial("http://60.205.157.230:8545")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	account := common.HexToAddress("0xcb522031eD04375066653e40667839d813EB67EB")
+	account := common.HexToAddress("0x105909ad4d8594A93Ac2456B6515c5Da0AFD10bc")
 	balance, err := client.BalanceAt(context.Background(), account, nil)
 	if err != nil {
 		log.Fatal(err)

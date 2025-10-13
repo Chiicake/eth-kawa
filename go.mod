@@ -61,6 +61,7 @@ require (
 	github.com/klauspost/cpuid/v2 v2.3.0 // indirect
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-runewidth v0.0.19 // indirect
+	github.com/mattn/go-sqlite3 v1.14.32 // indirect
 	github.com/minio/sha256-simd v1.0.1 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/nyaruka/phonenumbers v1.0.55 // indirect
@@ -99,9 +100,10 @@ require (
 	golang.org/x/net v0.44.0 // indirect
 	golang.org/x/sync v0.17.0 // indirect
 	golang.org/x/sys v0.36.0 // indirect
-	golang.org/x/text v0.29.0 // indirect
+	golang.org/x/text v0.30.0 // indirect
 	golang.org/x/time v0.13.0 // indirect
 	gonum.org/v1/plot v0.16.0 // indirect
 	google.golang.org/protobuf v1.36.9 // indirect
+	gorm.io/driver/sqlite v1.6.0 // indirect
 	rsc.io/pdf v0.1.1 // indirect
 )

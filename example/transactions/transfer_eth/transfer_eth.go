@@ -19,7 +19,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	privateKey, err := crypto.HexToECDSA("14242245270b5d063c3b0ae107b698cdb4b181492837f6f2186da5418daa24d4")
+	privateKey, err := crypto.HexToECDSA("195609d8fd3c4b73f3f2787006174b317d7d6c8219de296e779dc733c02a6b84")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -36,22 +36,24 @@ func main() {
 		log.Fatal(err)
 	}
 
-	value := big.NewInt(1000000000000000000) // in wei (1 eth)
-	gasLimit := uint64(41000)                // in units
+	value := big.NewInt(100000000000000) // in wei (1 eth)
+	gasLimit := uint64(4100000)          // in units
 	gasPrice, err := client.SuggestGasPrice(context.Background())
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	toAddress := common.HexToAddress("0x453B2fb644f24c8D213d6119AB1764f0B0702334")
+	toAddress := common.HexToAddress("6AF8b6DC69e17E7eee12A0DB98935055d210d02d")
 	var data []byte
 	data = []byte("hi")
 	tx := types.NewTransaction(nonce, toAddress, value, gasLimit, gasPrice, data)
 
-	chainID, err := client.NetworkID(context.Background())
-	if err != nil {
-		log.Fatal(err)
-	}
+	//networkID, err := client.NetworkID(context.Background())
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+
+	chainID := big.NewInt(1337)
 
 	signedTx, err := types.SignTx(tx, types.NewEIP155Signer(chainID), privateKey)
 	if err != nil {

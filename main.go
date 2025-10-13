@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	account_handler "eth-kawa/biz/handler/account"
 	"eth-kawa/biz/infra"
 	"eth-kawa/biz/subscribe"
 	"github.com/cloudwego/hertz/pkg/app"
@@ -21,8 +22,9 @@ const (
 func main() {
 	infra.InitDB()
 	infra.InitEthClient()
+	infra.InitWSEthClient()
 
-	go subscribe.Subscribe(wsURL)
+	go subscribe.Subscribe()
 	h := server.Default()
 
 	h.GET("/ping", func(ctx context.Context, c *app.RequestContext) {
@@ -52,6 +54,15 @@ func main() {
 			})
 		}
 		c.JSON(consts.StatusOK, utils.H{"message": "block", "data": data})
+	})
+
+	h.GET("/api/accounts", func(ctx context.Context, c *app.RequestContext) {
+		account_handler.NewAccountHandler(infra.GlobalEthClient, ctx, c, infra.GlobalDB).GetBalance()
+	})
+
+	// transfer
+	h.POST("/api/transfer", func(ctx context.Context, c *app.RequestContext) {
+		account_handler.NewAccountHandler(infra.GlobalEthClient, ctx, c, infra.GlobalDB).Transfer()
 	})
 
 	h.Spin()

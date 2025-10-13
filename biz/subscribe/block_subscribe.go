@@ -8,8 +8,8 @@ import (
 	"log"
 )
 
-func Subscribe(url string) {
-	client := infra.GlobalEthClient
+func Subscribe() {
+	client := infra.GlobalWSEthClient
 
 	headers := make(chan *types.Header)
 	sub, err := client.SubscribeNewHead(context.Background(), headers)
