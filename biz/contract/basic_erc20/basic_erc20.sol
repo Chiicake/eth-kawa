@@ -80,7 +80,7 @@ contract BasicERC20 {
         // 检查授权额度是否充足
         require(allowance[sender][msg.sender] >= value, "ERC20: allowance exceeded");
 
-        // 更新余额
+        // 更新余额 
         balanceOf[sender] -= value;
         balanceOf[recipient] += value;
         // 更新授权额度
