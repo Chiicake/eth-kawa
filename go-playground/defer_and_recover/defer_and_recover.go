@@ -1,10 +1,13 @@
-package main
+package defer_and_recover
 
 import (
 	"fmt"
 	"sync"
 )
 
+// defer is a stack, so the last defer will be executed first
+// i can use recover to catch the panic in foo, and continue the execution of bar
+// like try catch in java
 func foo() {
 	panic("foo")
 }
@@ -18,7 +21,7 @@ func bar(i int) {
 	foo()
 }
 
-func main() {
+func deferAndRecover() {
 	var wg sync.WaitGroup
 	for i := 0; i < 5; i++ {
 		wg.Add(1)
